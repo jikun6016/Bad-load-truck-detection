@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="1a06a84a-802e-4f95-a54b-e332b2541292" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/yolov5/.github/ISSUE_TEMPLATE/bug-report.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5/.github/ISSUE_TEMPLATE/config.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5/.github/ISSUE_TEMPLATE/feature-request.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5/.github/ISSUE_TEMPLATE/question.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5/.github/dependabot.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5/.github/workflows/ci-testing.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5/.github/workflows/cla.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5/.github/workflows/codeql-analysis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5/.github/workflows/docker.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5/.github/workflows/format.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5/.github/workflows/greetings.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5/.github/workflows/links.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5/.github/workflows/merge-main-into-prs.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5/.github/workflows/stale.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yolov5/detect.py" beforeDir="false" afterPath="$PROJECT_DIR$/yolov5/detect.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2fOvizlLOMJ8dgglCoSQbMc1gA8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PY-241.14494.241" />
+        <option value="bundled-python-sdk-0509580d9d50-28c9f5db9ffe-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.14494.241" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="1a06a84a-802e-4f95-a54b-e332b2541292" name="변경" comment="" />
+      <created>1713685071125</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1713685071125</updated>
+      <workItem from="1713685072347" duration="5000" />
+    </task>
+    <servers />
+  </component>
+</project>

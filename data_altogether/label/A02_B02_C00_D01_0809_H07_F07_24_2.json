@@ -1,0 +1,31 @@
+{
+	"FILE":[{
+		"FILE_NAME":"A02_B02_C00_D01_0809_H07_F07_24_2.jpg",
+		"COLLECTIONMETHOD":"CCTV",
+		"DAY/NIGHT":"주",
+		"LANE":"다선",
+		"ROADNUMBER":"50",
+		"PLACE":"영동고속도로 횡성대교시점",
+		"IDCODE":"F07",
+		"DATE":"2021.08.09",
+		"WEATHER":"맑은날",
+		"RESOLUTION":"1920*1080",
+		"MAKE":"한국도로공사",
+		"MODELNAME":"실시간",
+		"FILESIZE":"524044",
+		"BOUNDINGCOUNT":"1",
+		"ITEMS":[
+			{
+			"DRAWING":"Box",
+			"SEGMENT":"중형차",
+			"BOX":"697.07,575.37,157.52,103.29",
+			"POLYGON":"",
+			"PACKAGE":"정상차량",
+			"CLASS":"정상차량",
+			"COVER":"",
+			"COURSE":"전면좌측",
+			"CURVE":"정상주행"
+			}
+		]
+	}]
+}

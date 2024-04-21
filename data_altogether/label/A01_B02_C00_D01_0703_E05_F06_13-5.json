@@ -1,0 +1,31 @@
+{
+	"FILE":[{
+		"FILE_NAME":"A01_B02_C00_D01_0703_E05_F06_13-5.jpg",
+		"COLLECTIONMETHOD":"CCTV",
+		"DAY/NIGHT":"주",
+		"LANE":"다선",
+		"ROADNUMBER":"아트센터대로",
+		"PLACE":"아트센터교1(송도동73)",
+		"IDCODE":"F06",
+		"DATE":"2021.07.03",
+		"WEATHER":"맑은날",
+		"RESOLUTION":"1920*1080",
+		"MAKE":"한화테크윈",
+		"MODELNAME":"XNO-6020R",
+		"FILESIZE":"328495",
+		"BOUNDINGCOUNT":"1",
+		"ITEMS":[
+			{
+			"DRAWING":"Box",
+			"SEGMENT":"대형차",
+			"BOX":"679.49,776.21,184.72,134.59",
+			"POLYGON":"",
+			"PACKAGE":"정상차량",
+			"CLASS":"정상차량",
+			"COVER":"",
+			"COURSE":"후면우측",
+			"CURVE":"정상주행"
+			}
+		]
+	}]
+}

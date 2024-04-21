@@ -1,0 +1,31 @@
+{
+	"FILE":[{
+		"FILE_NAME":"A02_B02_C00_D01_0729_H03_F08_10-2.jpg",
+		"COLLECTIONMETHOD":"CCTV",
+		"DAY/NIGHT":"주",
+		"LANE":"다선",
+		"ROADNUMBER":"153",
+		"PLACE":"부곡1교, 서해안선",
+		"IDCODE":"F08",
+		"DATE":"2021.07.29",
+		"WEATHER":"맑은날",
+		"RESOLUTION":"1920*1080",
+		"MAKE":"한국도로공사",
+		"MODELNAME":"실시간",
+		"FILESIZE":"407618",
+		"BOUNDINGCOUNT":"1",
+		"ITEMS":[
+			{
+			"DRAWING":"Box",
+			"SEGMENT":"중형차",
+			"BOX":"851.44,377.47,470.76,310.18",
+			"POLYGON":"",
+			"PACKAGE":"정상차량",
+			"CLASS":"정상차량",
+			"COVER":"",
+			"COURSE":"후면우측",
+			"CURVE":"정상주행"
+			}
+		]
+	}]
+}
