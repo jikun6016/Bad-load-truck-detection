@@ -221,11 +221,14 @@ with torch.no_grad():  # Disable gradient calculation during validation
             continue
         inputs, labels = batch
 
+        inputs = inputs.to(device)
+
         outputs = resnet50(inputs)
         outputs = F.softmax(outputs, dim=1)
 
 
-        labels = torch.tensor([classes_mapping[label] for label in labels])
+        labels = torch.tensor([classes_mapping[label] if label in classes_mapping else -1 for label in labels],
+                              dtype=torch.long).to(device)
         #print('out-lab %d', i)
         #print(outputs, labels)
 

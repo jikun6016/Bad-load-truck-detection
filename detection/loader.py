@@ -8,6 +8,7 @@ import torchvision.transforms as transforms
 from torchvision.io import read_image
 import json
 
+checkSum = 0
 
 class ImageDataset(Dataset):
     def __init__(self, annotations_file,label_dir, img_dir, transform=None, target_transform=None):
@@ -47,6 +48,9 @@ class ImageDataset(Dataset):
         if os.path.exists(img_path):
             print("File exists, trying to open.")
             image = Image.open(img_path)  # PIL 라이브러리를 사용하여 이미지 파일을 엽니다
+            global checkSum
+            checkSum += 1
+            print(checkSum)
         else:
             print("File not found:", img_path)
             return None, None  # 파일이 없을 경우 None 반환 # PIL 라이브러리를 사용하여 이미지 파일을 엽니다
