@@ -12,13 +12,22 @@ import datetime
 import time
 
 import torchvision.transforms as transforms
+from torchvision.datasets import ImageFolder
+from torchvision.models import ResNet50_Weights
 from torchvision.utils import save_image, make_grid
-from torch.utils.data import DataLoader, SubsetRandomSampler
+from torch.utils.data import DataLoader, SubsetRandomSampler, dataset
 from loader import *
 from torchvision import datasets
 from torch.autograd import Variable
+from torch.utils.data.dataloader import default_collate
 
-parser = argparse.ArgumentParser()
+def custom_collate_fn(batch):
+    filtered_batch = [item for item in batch if item[0] is not None]
+    if len(filtered_batch) == 0:
+        return None  # None 반환
+    return default_collate(filtered_batch)
+
+parser = argparse.ArgumentParser() # 명령줄 인자 파싱을 위한 ArgumentParser객체 생성
 parser.add_argument("--epoch", type=int, default=0, help="epoch to start training from")
 parser.add_argument("--n_epochs", type=int, default=2, help="number of epochs of training")
 parser.add_argument("--batch_size", type=int, default=1, help="size of the batches")
@@ -35,31 +44,43 @@ parser.add_argument("--checkpoint_interval", type=int, default=10, help="interva
 parser.add_argument("--n_residual_blocks", type=int, default=9, help="number of residual blocks in generator")
 parser.add_argument("--lambda_cyc", type=float, default=10.0, help="cycle loss weight")
 parser.add_argument("--lambda_id", type=float, default=5.0, help="identity loss weight")
-option = parser.parse_args()
-
-cuda = torch.cuda.is_available()
+option = parser.parse_args() # 파싱된 인자 값을 option에 추가
 
 
 
-os.makedirs(r"C:\truck_detection_classification\data\data\result", exist_ok=True)
-os.makedirs(r"C:\truck_detection_classification\data\data\model", exist_ok=True)
 
-loss_function = nn.CrossEntropyLoss()
 
-input_shape = (option.channels, option.img_height, option.img_width)
 
-resnet50 = models.resnet50(input_shape, pretrained=True)
+# 현재 경로의 결과값과 모델 저장 경로 설정
+os.makedirs("./truck_detection_classification/data/data/result", exist_ok=True)
+os.makedirs("./truck_detection_classification/data/data/model", exist_ok=True)
 
-if cuda:
-    resnet50 = resnet50.cuda()
-    loss_function = loss_function.cuda()
+loss_function = nn.CrossEntropyLoss() # 로스 펑션 크로스엔트로피로 설정
 
-if option.epoch != 0:
-    resnet50.load_state_dict("C:\truck_detection_classification\data\data\model%d.pth"% option.epoch)
+#input_shape = (option.channels, option.img_height, option.img_width) # 입력이미지의 차원 설정
 
-optimizer = opt.SGD(resnet50.parameters(), lr = 0.01)
+resnet50 = models.resnet50(weights=ResNet50_Weights.DEFAULT)# 사전 훈련된 ResNet50 모델 로드
 
-Tensor = torch.cuda.FloatTensor if cuda else torch.Tensor
+device = (
+    "cuda"
+    if torch.cuda.is_available()
+    else "mps"
+    if torch.backends.mps.is_available()
+    else "cpu"
+)
+print(f"Using {device} device")
+
+
+resnet50 = resnet50.to(device)
+loss_function = loss_function.to(device)
+
+if option.epoch != 0: # 훈련을 어느 시점(에폭)에서 재개할 것인지를 결정
+    resnet50.load_state_dict("./truck_detection_classification/data/data/model%d.pth"% option.epoch)
+
+optimizer = opt.SGD(resnet50.parameters(), lr = 0.01) # SGD 로 학습, 학습률은 0.01
+
+def Tensor(data):
+    return torch.tensor(data, device=device) # 사용할 텐서 타입을 설정합니다.
 
 # Image transformations
 
@@ -69,10 +90,12 @@ trans = transforms.Compose([
 ])
 
  # need both val and train
-data_dir_root = r"C:\truck_detection_classification\data\data\data_altogether"
-data_label_dir = r"C:\truck_detection_classification\data\data\data_altogether\label"
-data_pic_dir = r"C:\truck_detection_classification\data\data\data_altogether\pics"
+data_dir_root = "/Users/parkjimin/Documents/24-1/캡스톤디자인/detection_project/detection/truck_detection_classification/data/data/data_altogether"
+data_label_dir = "/Users/parkjimin/Documents/24-1/캡스톤디자인/detection_project/detection/truck_detection_classification/data/data/data_altogether/label"
+data_pic_dir = "/Users/parkjimin/Documents/24-1/캡스톤디자인/detection_project/detection/truck_detection_classification/data/data/data_altogether/pics"
 
+#dataset = ImageFolder(root=data_pic_dir, transform=trans)
+# 데이터셋의 실제 크기를 기반으로 인덱스 생성
 data_size = 15866
 indices = list(range(data_size))
 
@@ -87,7 +110,7 @@ if isinstance(train_sampler, SubsetRandomSampler):
     np.random.shuffle(train_sampler.indices)
 
 if isinstance(val_sampler, SubsetRandomSampler):
-    np.random.shuffle(train_sampler.indices)
+    np.random.shuffle(val_sampler.indices)
 
 print("Length of train_indices:", len(train_indices))
 print("Length of val_indices:", len(val_indices))
@@ -102,6 +125,7 @@ classes = ('대형차', '중형차','소형차')
 classes_mapping = {'대형차':0, '중형차':1, '소형차':2}
 
 resnet50.fc = nn.Linear(resnet50.fc.in_features, num_classes)
+resnet50 = resnet50.to(device)
 
 #sampling
 #def sample_images(batches_done):
@@ -112,25 +136,74 @@ resnet50.fc = nn.Linear(resnet50.fc.in_features, num_classes)
 #  Training
 prev_time = time.time()
 indicator = 0
+
+
+
+train_dataset = ImageDataset(data_dir_root, data_label_dir, data_pic_dir, transform=trans)
+val_dataset = ImageDataset(data_dir_root, data_label_dir, data_pic_dir, transform=trans)
+
+# 데이터 로더 설정
+train_dataloader = DataLoader(
+    train_dataset,
+    batch_size=option.batch_size,
+    shuffle=False,
+    num_workers=option.n_cpu,
+    sampler=train_sampler,
+    collate_fn=custom_collate_fn  # 커스텀 collate 함수 사용
+)
+
+val_dataloader = DataLoader(
+    val_dataset,
+    batch_size=5,  # 검증 데이터 로더의 배치 크기 설정
+    shuffle=False,
+    num_workers=0,
+    sampler=val_sampler,
+    collate_fn=custom_collate_fn  # 커스텀 collate 함수 사용
+)
+
 for epoch in range(option.n_epochs):
     running_loss = 0.0
 
     for i, batch in enumerate(train_dataloader):
+        if batch is None:  # 배치가 None인 경우 건너뛰기
+            print("Skipping empty batch.")
+            continue
+
         inputs, labels = batch
+        inputs = inputs.to(device)  # 입력 데이터를 디바이스로 이동
+
+        # 빈 배치 검사
+        if inputs.nelement() == 0:
+            print("Skipping empty batch.")
+            continue
+
+        # 레이블을 디바이스로 이동
+        labels = torch.tensor([classes_mapping[label] if label in classes_mapping else -1 for label in labels],
+                              dtype=torch.long).to(device)
+
         optimizer.zero_grad()
 
+        # 모델에 입력
         outputs = resnet50(inputs)
         outputs = F.softmax(outputs, dim=1)
-        labels = torch.tensor([classes_mapping[label] for label in labels])
+
+        # 레이블 변환 중 잘못된 레이블을 처리
+        if (labels == -1).any():
+            print("Invalid labels found, skipping batch")
+            continue
+
+        # 손실 계산 및 역전파
         loss = loss_function(outputs, labels)
         loss.backward()
         optimizer.step()
 
         running_loss += loss.item()
-        if i % 2000 == 1999:  # print every 2000 mini-batches
+
+        if i % 2000 == 1999:  # 매 2000번째 배치마다 로그 출력
             print(f'[{epoch + 1}, {i + 1:5d}] loss: {running_loss / 2000:.3f}')
             running_loss = 0.0
-        indicator = indicator+1
+
+
 print(indicator)
 print('Finished Training')
 
@@ -143,6 +216,9 @@ total = 0
 indicator = 0
 with torch.no_grad():  # Disable gradient calculation during validation
     for batch in val_dataloader:
+        if batch is None:  # 배치가 None인 경우 건너뛰기
+            print("Skipping empty batch.")
+            continue
         inputs, labels = batch
 
         outputs = resnet50(inputs)

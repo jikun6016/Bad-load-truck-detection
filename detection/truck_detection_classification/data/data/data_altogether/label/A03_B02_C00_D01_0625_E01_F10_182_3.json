@@ -1,0 +1,31 @@
+{
+	"FILE":[{
+		"FILE_NAME":"A03_B02_C00_D01_0625_E01_F10_182_3.jpg",
+		"COLLECTIONMETHOD":"CCTV",
+		"DAY/NIGHT":"주",
+		"LANE":"다선",
+		"ROADNUMBER":"송도바이오대로",
+		"PLACE":"바이오산업교1 (인천광역시 연수구 송도동 242)",
+		"IDCODE":"F10",
+		"DATE":"2021.06.25",
+		"WEATHER":"맑은날",
+		"RESOLUTION":"1920*1080",
+		"MAKE":"한화테크윈",
+		"MODELNAME":"XNO-6020R",
+		"FILESIZE":"423753",
+		"BOUNDINGCOUNT":"1",
+		"ITEMS":[
+			{
+			"DRAWING":"Box",
+			"SEGMENT":"소형차",
+			"BOX":"552.69,655.51,126.16,106.11",
+			"POLYGON":"",
+			"PACKAGE":"정상차량",
+			"CLASS":"정상차량",
+			"COVER":"",
+			"COURSE":"전면좌측",
+			"CURVE":"정상주행"
+			}
+		]
+	}]
+}

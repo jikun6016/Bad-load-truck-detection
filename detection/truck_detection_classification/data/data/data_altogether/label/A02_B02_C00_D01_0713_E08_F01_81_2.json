@@ -1,0 +1,31 @@
+{
+	"FILE":[{
+		"FILE_NAME":"A02_B02_C00_D01_0713_E08_F01_81_2.jpg",
+		"COLLECTIONMETHOD":"CCTV",
+		"DAY/NIGHT":"주",
+		"LANE":"다선",
+		"ROADNUMBER":"356번지방도로",
+		"PLACE":"초지대교2(초지리125-362)",
+		"IDCODE":"F01",
+		"DATE":"2021.07.13",
+		"WEATHER":"맑은날",
+		"RESOLUTION":"1920*1080",
+		"MAKE":"한화테크윈",
+		"MODELNAME":"XNO-6020R",
+		"FILESIZE":"316450",
+		"BOUNDINGCOUNT":"1",
+		"ITEMS":[
+			{
+			"DRAWING":"Box",
+			"SEGMENT":"중형차",
+			"BOX":"515.09,533.11,226.42,114.88",
+			"POLYGON":"",
+			"PACKAGE":"정상차량",
+			"CLASS":"정상차량",
+			"COVER":"",
+			"COURSE":"전면좌측",
+			"CURVE":"정상주행"
+			}
+		]
+	}]
+}
